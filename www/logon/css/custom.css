@@ -1,0 +1,10 @@
+.sapMTB-Info-CTX .sapMText.scienerMText  {
+ font-style: normal;
+ font-weight: bold;
+}
+
+.sapMTB-Info-CTX .sapMText.scienerMTextError  {
+    font-style: normal;
+    font-weight:bold;
+    color: red;
+}

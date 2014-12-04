@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="openui5/sap-ui-core.js"
+            id="sap-ui-bootstrap"
+            data-sap-ui-libs="sap.m"
+            data-sap-ui-theme="sap_bluecrystal"
+            data-sap-ui-xx-bindingSyntax="complex"
+            data-sap-ui-resourceroots='{
+            "sciener.mobile.inspection":"./inspection",
+            "sciener.mobile.logon":"./logon",
+            "sciener.mobile.workplace":"./workplace"
+            }'>
+    </script>
+
+    <script>
+        jQuery.sap.require("sciener.mobile.workplace.Application");
+        sciener.mobile.workplace.Application.config({
+            environment: sciener.mobile.workplace.Application.Environment.Cordova,
+            components: [
+                "sciener.mobile.logon",
+                "sciener.mobile.inspection"
+            ],
+            initialComponent: "sciener.mobile.logon",
+            logonModel: new sap.ui.model.json.JSONModel()//
+        });
+        sciener.mobile.workplace.Application.init();
+    </script>
+
+</head>
+<body class="sapUiBody" role="application">
+<div id="content"></div>
+</body>
+</html>

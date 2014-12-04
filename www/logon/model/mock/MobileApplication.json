@@ -1,0 +1,15 @@
+[
+    {
+        "ApplicationID": "sciener.m.inspection",
+        "Description": "Mobile Inspection",
+        "ModelURI": "http://sciener.ru/inspection/",
+        "Version": "1"
+    },
+
+    {
+        "ApplicationID": "sciener.m.bugreport",
+        "Description": "Bug report",
+        "ModelURI": "http://sciener.ru/bugreport/",
+        "Version": "1"
+    }
+]

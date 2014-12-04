@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" Version="1.0">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:sap="http://www.sap.com/Protocols/SAPData" Namespace="ZMOB00_CONNECTION_SRV">
+            <EntityType Name="MobileUser">
+                <Key>
+                    <PropertyRef Name="UserID"/>
+                </Key>
+                <Property Name="UserID" Nullable="false" Type="Edm.String"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <Property Name="Timezone" Type="Edm.String"/>
+                <Property Name="Lang" Type="Edm.String"/>
+                <NavigationProperty FromRole="From_User" Name="AssignUserToAppSet" Relationship="ZMOB00_CONNECTION_SRV.MobileUserAssignUserToApp" ToRole="To_UserToAppAssing"/>
+            </EntityType>
+            <EntityType Name="MobileApplication">
+                <Key>
+                    <PropertyRef Name="ApplicationID"/>
+                </Key>
+                <Property Name="ApplicationID" Nullable="false" Type="Edm.String"/>
+                <Property Name="Description" Type="Edm.String"/>
+                <Property Name="ModelURI" Type="Edm.String"/>
+                <Property Name="Version" Type="Edm.String"/>
+                <NavigationProperty FromRole="From_MobileApplication" Name="AssignUserToAppSet" Relationship="ZMOB00_CONNECTION_SRV.MobileApplicationAssignUserToApp" ToRole="To_UserToAppAssing"/>
+            </EntityType>
+            <EntityType Name="AssignUserToApp">
+                <Key>
+                    <PropertyRef Name="ApplicationID"/>
+                    <PropertyRef Name="UserID"/>
+                </Key>
+                <Property Name="ApplicationID" Nullable="false" Type="Edm.String"/>
+                <Property Name="UserID" Nullable="false" Type="Edm.String"/>
+                <NavigationProperty FromRole="To_UserToAppAssing" Name="MobileUser" Relationship="ZMOB00_CONNECTION_SRV.MobileUserAssignUserToApp" ToRole="From_User"/>
+                <NavigationProperty FromRole="To_UserToAppAssing" Name="MobileApplication" Relationship="ZMOB00_CONNECTION_SRV.MobileApplicationAssignUserToApp" ToRole="From_MobileApplication"/>
+                <NavigationProperty FromRole="From_UserToAppAssing" Name="ConnectionSet" Relationship="ZMOB00_CONNECTION_SRV.AssignUserToAppConnection" ToRole="To_Connection"/>
+            </EntityType>
+            <EntityType Name="Connection">
+                <Key>
+                    <PropertyRef Name="ConnectionID"/>
+                </Key>
+                <Property Name="ConnectionID" Nullable="false" Type="Edm.String"/>
+                <Property Name="ApplicationID" Type="Edm.String"/>
+                <Property Name="UserID" Type="Edm.String"/>
+                <Property Name="DeviceType" Type="Edm.String"/>
+                <Property Name="DeviceUUID" Type="Edm.String"/>
+                <NavigationProperty FromRole="To_Connection" Name="AssignUserToApp" Relationship="ZMOB00_CONNECTION_SRV.AssignUserToAppConnection" ToRole="From_UserToAppAssing"/>
+            </EntityType>
+            <Association Name="MobileUserAssignUserToApp">
+                <End Multiplicity="1" Role="From_User" Type="ZMOB00_CONNECTION_SRV.MobileUser"/>
+                <End Multiplicity="*" Role="To_UserToAppAssing" Type="ZMOB00_CONNECTION_SRV.AssignUserToApp"/>
+                <ReferentialConstraint>
+                    <Principal Role="From_User">
+                        <PropertyRef Name="UserID"/>
+                    </Principal>
+                    <Dependent Role="To_UserToAppAssing">
+                        <PropertyRef Name="UserID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="MobileApplicationAssignUserToApp">
+                <End Multiplicity="1" Role="From_MobileApplication" Type="ZMOB00_CONNECTION_SRV.MobileApplication"/>
+                <End Multiplicity="*" Role="To_UserToAppAssing" Type="ZMOB00_CONNECTION_SRV.AssignUserToApp"/>
+                <ReferentialConstraint>
+                    <Principal Role="From_MobileApplication">
+                        <PropertyRef Name="ApplicationID"/>
+                    </Principal>
+                    <Dependent Role="To_UserToAppAssing">
+                        <PropertyRef Name="ApplicationID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="AssignUserToAppConnection">
+                <End Multiplicity="1" Role="From_UserToAppAssing" Type="ZMOB00_CONNECTION_SRV.AssignUserToApp"/>
+                <End Multiplicity="*" Role="To_Connection" Type="ZMOB00_CONNECTION_SRV.Connection"/>
+                <ReferentialConstraint>
+                    <Principal Role="From_UserToAppAssing">
+                        <PropertyRef Name="ApplicationID"/>
+                        <PropertyRef Name="UserID"/>
+                    </Principal>
+                    <Dependent Role="To_Connection">
+                        <PropertyRef Name="ApplicationID"/>
+                        <PropertyRef Name="UserID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="default" m:IsDefaultEntityContainer="true">
+                <EntitySet EntityType="ZMOB00_CONNECTION_SRV.MobileUser" Name="MobileUserSet"/>
+                <EntitySet EntityType="ZMOB00_CONNECTION_SRV.MobileApplication" Name="MobileApplicationSet"/>
+                <EntitySet EntityType="ZMOB00_CONNECTION_SRV.AssignUserToApp" Name="AssignUserToAppSet"/>
+                <EntitySet EntityType="ZMOB00_CONNECTION_SRV.Connection" Name="ConnectionSet"/>
+                <AssociationSet Association="ZMOB00_CONNECTION_SRV.MobileUserAssignUserToApp" Name="MobileUserAssignUserToAppSet">
+                    <End EntitySet="MobileUserSet" Role="From_User"/>
+                    <End EntitySet="AssignUserToAppSet" Role="To_UserToAppAssing"/>
+                </AssociationSet>
+                <AssociationSet Association="ZMOB00_CONNECTION_SRV.MobileApplicationAssignUserToApp" Name="MobileApplicationAssignUserToAppSet">
+                    <End EntitySet="MobileApplicationSet" Role="From_MobileApplication"/>
+                    <End EntitySet="AssignUserToAppSet" Role="To_UserToAppAssing"/>
+                </AssociationSet>
+                <AssociationSet Association="ZMOB00_CONNECTION_SRV.AssignUserToAppConnection" Name="AssignUserToAppConnectionSet">
+                    <End EntitySet="AssignUserToAppSet" Role="From_UserToAppAssing"/>
+                    <End EntitySet="ConnectionSet" Role="To_Connection"/>
+                </AssociationSet>
+            </EntityContainer>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

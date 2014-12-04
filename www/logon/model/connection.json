@@ -1,0 +1,21 @@
+{
+  "MobileApplications":[
+      {
+        "ApplicationID": "SCIENER.M.INSPECTION",
+        "Description": "SCIENER_M_INSPECTION",
+        "ModelURI": "",
+        "Version": ""
+      },
+
+      {
+        "ApplicationID": "SCIENER.M.BUGREPORT",
+        "Description": "SCIENER_M_BAGREPORT",
+        "ModelURI": "",
+        "Version": ""
+      }
+  ],
+  "MobileUsers": [
+  ],
+  "Connections": [
+  ]
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
+    <script src="https://sapui5.netweaver.ondemand.com/resources/sap-ui-core.js"
+            id="sap-ui-bootstrap"
+            data-sap-ui-libs="sap.m"
+            data-sap-ui-theme="sap_bluecrystal"
+            data-sap-ui-xx-bindingSyntax="complex"
+            data-sap-ui-resourceroots='{"sciener.mobile.inspection":"./inspection"}'>
+    </script>
+
+    <script>
+        var logonModel = new sap.ui.model.json.JSONModel({user: "chebotarevsa"});
+        sap.ui.getCore().setModel(logonModel, "logon");
+        sap.ui.getCore().attachInit(function(){
+            new sap.m.Shell({
+                app: new sap.ui.core.ComponentContainer({
+                    height : "100%",
+                    name : "sciener.mobile.inspection"
+                })
+            }).placeAt("content");
+        });
+    </script>
+
+</head>
+<body class="sapUiBody" role="application">
+    <div id="content"></div>
+</body>
+</html>

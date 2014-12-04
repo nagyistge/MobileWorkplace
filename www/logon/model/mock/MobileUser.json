@@ -1,0 +1,20 @@
+[
+    {
+        "UserID": "chebotarevsa",
+        "Name": "Sergey Chebotarev",
+        "Timezone": "GMT+3",
+        "Lang": "ru-RU"
+    },
+    {
+        "UserID": "fesenko_v",
+        "Name": "Valentina Fesenko",
+        "Timezone": "GMT+3",
+        "Lang": "ru-RU"
+    },
+    {
+        "UserID": "cinchenko_oa",
+        "Name": "Olga Cipchenko",
+        "Timezone": "GMT+3",
+        "Lang": "ru-RU"
+    }
+]

@@ -1,0 +1,6 @@
+{
+  "isFake": false,
+  "FakeUrl": "http://fake.srv/",
+  "RealUrl": "http://rx300s6-1.sciener.bzc.local:8020/sap/opu/odata/sap/ZMOB00_CONNECTION_SRV/",
+  "Logo": "images/menu_logo.png"
+}
